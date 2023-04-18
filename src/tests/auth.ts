@@ -5,12 +5,12 @@ import { City } from '../models/User';
 require("chai").should();
 
 describe("GET /cities", () => {
-    it("should return an array of cities with status 200", async () => {
+    it("restituire un array di città con lo stato 200", async () => {
       const response = await request(app).get("/cities");
       response.status.should.equal(200);
       response.body.should.be.an("array");
     });
-    it("should return all cities when no population filter is applied", async () => {
+    it("ritorna le città quando non viene applicato nessun filtro sulla popolazione", async () => {
         const response = await request(app).get("/cities");
         response.status.should.equal(200);
         response.body.should.be.an("array");
@@ -20,7 +20,7 @@ describe("GET /cities", () => {
 });
 
 describe("GET /cities/:id", () => {
-    it("should return a city with the specified id with status 200", async () => {
+    it("città con l'id specificato con lo status 200", async () => {
       
       const newCity = await City.create({ name: "TestCity", population: 10000 });
       
@@ -46,7 +46,7 @@ describe('PUT /cities/:id', () => {
   });
   
 
-  it('Dovrebbe modificare correttamente i dati di una città esistente', async () => {
+  it('modificare correttamente i dati di una città esistente', async () => {
     const res = await request(app)
       .put(`/cities/${cityId}`)
       .send({ population: 3000000 });
@@ -55,7 +55,7 @@ describe('PUT /cities/:id', () => {
     assert.equal(res.body.population, 3000000);
   });
 
-  it('Dovrebbe restituire un errore 404 per una città inesistente', async () => {
+  it('errore 404 per una città inesistente', async () => {
     const res = await request(app)
       .put('/cities/123456789012345678901234')
       .send({ population: 3000000 });
@@ -80,7 +80,7 @@ describe('DELETE /cities/:id', () => {
     cityId = city._id.toString();
   });
 
-  it('Dovrebbe eliminare correttamente una città esistente', async () => {
+  it(' eliminare correttamente una città esistente', async () => {
     const res = await request(app)
       .delete(`/cities/${cityId}`);
 
@@ -93,7 +93,7 @@ describe('DELETE /cities/:id', () => {
     assert.isNull(deletedCity);
   });
 
-  it('Dovrebbe restituire un errore 404 per una città inesistente', async () => {
+  it('errore 404 per una città inesistente', async () => {
     const res = await request(app)
       .delete('/cities/123456789012345678901234');
 
@@ -108,7 +108,7 @@ describe('DELETE /cities/:id', () => {
 });
 
 describe('POST /cities', () => {
-    it('Dovrebbe inserire correttamente una nuova città', async () => {
+    it(' inserire correttamente una nuova città', async () => {
       const res = await request(app)
         .post('/cities')
         .send({ name: 'Milano', population: 1400000 });
